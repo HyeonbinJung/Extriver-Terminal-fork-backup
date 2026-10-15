@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fincept Terminal Easy</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f5f4f1; --panel: #ffffff; --panel-2: #f0eeea; --border: #e3dfd8;
+  --text: #1d1b18; --muted: #6b655c; --accent: #c06524; --accent-weak: #f8e9dd;
+  --up: #d1373d; --down: #2b6fd6; --ok: #2f8a4a; --ok-weak: #e5f3e9; --warn: #b26a00; --warn-weak: #fdf1df;
+  --bad: #c62d2d; --bad-weak: #fbe7e7; --grid: rgba(0,0,0,.06);
+  --s1: #c06524; --s2: #2b6fd6; --s3: #2f8a4a; --s4: #8a4fd1; --s5: #c9a227; --s6: #d14f8c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110; --panel: #1a1917; --panel-2: #23211e; --border: #33302b;
+    --text: #ece8e1; --muted: #a39b8f; --accent: #e8874a; --accent-weak: #3a2618;
+    --up: #ff6b6b; --down: #6aa4ff; --ok: #5fcf83; --ok-weak: #17291d; --warn: #f2b14c; --warn-weak: #2f2414;
+    --bad: #ff7b7b; --bad-weak: #341a1a; --grid: rgba(255,255,255,.07);
+    --s1: #e8874a; --s2: #6aa4ff; --s3: #5fcf83; --s4: #b58cf0; --s5: #e5c35a; --s6: #f07ab2;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.6 system-ui, -apple-system, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+a { color: var(--accent); }
+header { position: sticky; top: 0; z-index: 10; background: var(--panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 18px; padding: 12px 24px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 6px; font-weight: 800; font-size: 17px; letter-spacing: -.01em; }
+.brand .dot { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); display: inline-block; align-self: center; }
+.brand small { color: var(--accent); font-weight: 700; }
+nav { display: flex; gap: 2px; flex-wrap: wrap; }
+nav button { border: 0; background: none; color: var(--muted); padding: 7px 12px; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 600; }
+nav button:hover { background: var(--panel-2); color: var(--text); }
+nav button.active { background: var(--accent-weak); color: var(--accent); }
+main { max-width: 1200px; margin: 0 auto; padding: 22px 24px 80px; }
+h2 { font-size: 21px; margin: 0 0 4px; letter-spacing: -.01em; }
+h3 { font-size: 15px; margin: 0 0 10px; }
+.sub { color: var(--muted); margin: 0 0 18px; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+.grid { display: grid; gap: 14px; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr)); }
+.grid > * { min-width: 0; }
+body { overflow-x: hidden; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.spacer { flex: 1; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+input, select { font: inherit; padding: 8px 11px; border: 1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 8px; }
+input:focus, select:focus { outline: 2px solid var(--accent-weak); border-color: var(--accent); }
+button.btn { font: inherit; font-weight: 700; padding: 8px 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel); color: var(--text); cursor: pointer; }
+button.btn:hover { background: var(--panel-2); }
+button.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.btn.primary:hover { filter: brightness(1.07); }
+button.btn:disabled { opacity: .55; cursor: wait; }
+.chip { border: 1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 99px; padding: 3px 11px; font: inherit; font-size: 12.5px; cursor: pointer; }
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 12.5px; font-weight: 700; color: var(--muted); }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; align-items: end; }
+.stat { background: var(--panel); border: 1px solid var(--border); border-radius: 11px; padding: 13px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat .k { color: var(--muted); font-size: 12.5px; font-weight: 600; }
+.stat .v { font-size: 21px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tag { display: inline-block; font-size: 11.5px; font-weight: 700; padding: 1px 8px; border-radius: 99px; width: fit-content; }
+.tag.good { background: var(--ok-weak); color: var(--ok); }
+.tag.mid { background: var(--warn-weak); color: var(--warn); }
+.tag.bad { background: var(--bad-weak); color: var(--bad); }
+.tag.neutral { background: var(--panel-2); color: var(--muted); }
+.up { color: var(--up); } .down { color: var(--down); }
+.chart-box { position: relative; height: 320px; }
+.chart-box.sm { height: 200px; }
+.term { border-bottom: 1px dotted currentColor; cursor: help; }
+#tip { position: fixed; z-index: 50; max-width: 320px; background: var(--text); color: var(--bg); padding: 10px 12px; border-radius: 9px; font-size: 13px; line-height: 1.55; pointer-events: none; opacity: 0; transition: opacity .12s; box-shadow: 0 6px 24px rgba(0,0,0,.18); }
+#tip.show { opacity: 1; }
+#tip b { display: block; margin-bottom: 3px; }
+.err { background: var(--bad-weak); color: var(--bad); padding: 10px 13px; border-radius: 9px; font-weight: 600; }
+.loading { color: var(--muted); padding: 30px; text-align: center; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 9px; border-top: 1px solid var(--border); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-size: 12px; font-weight: 700; border-top: 0; }
+.scroll-x { overflow-x: auto; }
+.hero { background: linear-gradient(135deg, var(--accent-weak), transparent 70%), var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin-bottom: 16px; }
+.hero h2 { font-size: 25px; }
+.card-link { cursor: pointer; transition: border-color .12s, transform .12s; }
+.card-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card-link .ico { font-size: 22px; }
+.feat { display: flex; flex-direction: column; gap: 6px; }
+.feat ul { margin: 2px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+.feat .needs { font-size: 12px; }
+.cat-title { margin: 22px 0 10px; font-size: 13px; font-weight: 800; color: var(--accent); letter-spacing: .02em; }
+.news a { text-decoration: none; color: var(--text); font-weight: 650; }
+.news a:hover { color: var(--accent); }
+.news li { margin-bottom: 10px; }
+.news ul { padding-left: 18px; margin: 0; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.heat td { text-align: center; font-weight: 700; }
+.note { background: var(--panel-2); border-radius: 9px; padding: 11px 13px; font-size: 13px; color: var(--muted); }
+.note b { color: var(--text); }
+.weights { display: flex; height: 26px; border-radius: 7px; overflow: hidden; }
+.weights div { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11.5px; font-weight: 700; min-width: 0; overflow: hidden; white-space: nowrap; }
+details > summary { cursor: pointer; font-weight: 700; color: var(--muted); }
+@media (max-width: 640px) {
+  header { padding: 10px 16px; gap: 8px; } main { padding: 16px 16px 60px; }
+  .chart-box { height: 260px; } .stat .v { font-size: 18px; }
+  .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .field[style] { grid-column: 1 / -1 !important; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="dot"></span>Fincept Terminal <small>Easy</small></div>
+  <nav id="nav">
+    <button data-tab="home" class="active">홈</button>
+    <button data-tab="stock">종목 분석</button>
+    <button data-tab="portfolio">포트폴리오</button>
+    <button data-tab="dcf">DCF 가치평가</button>
+    <button data-tab="option">옵션 계산기</button>
+    <button data-tab="macro">경제 지표</button>
+    <button data-tab="features">전체 기능 안내</button>
+  </nav>
+</header>
+
+<main>
+<!-- HOME -->
+<section id="tab-home">
+  <div class="hero">
+    <h2>금융 터미널, 쉽게 써보기</h2>
+    <p class="muted" style="margin:6px 0 0;max-width:760px">
+      <b>Fincept Terminal</b>은 블룸버그 같은 전문가용 금융 분석 프로그램을 오픈소스로 만든 데스크톱 앱입니다.
+      이 대시보드는 그 안의 Python 데이터·분석 모듈을 그대로 불러와, <b>설치·API 키·로그인 없이</b> 브라우저에서 핵심 기능을 써볼 수 있게 만든 한국어 초보자판이에요.
+      점선 밑줄이 있는 <span class="term" data-term="sharpe">용어</span>에 마우스를 올리면 쉬운 설명이 나옵니다.
+    </p>
+  </div>
+  <div class="grid g3" id="homeCards"></div>
+  <div class="note" style="margin-top:16px">
+    <b>데이터 출처</b> — 시세·재무·뉴스는 Yahoo Finance(Fincept의 <code>yfinance_data.py</code>), 경제 지표는 세계은행 공개 API(<code>worldbank_data.py</code>)입니다.
+    시세는 15분 이상 늦을 수 있고, 이 화면의 모든 수치는 학습·참고용이며 투자 권유가 아닙니다.
+  </div>
+</section>
+
+<!-- STOCK -->
+<section id="tab-stock" hidden>
+  <h2>종목 분석</h2>
+  <p class="sub">종목 하나의 가격 흐름, 위험, 수익성을 한눈에 봅니다. 한국 주식은 <b>종목코드.KS</b>(코스피) / <b>.KQ</b>(코스닥) 형식이에요.</p>
+  <div class="panel" style="margin-bottom:14px">
+    <form class="row" id="stockForm">
+      <input id="stockSym" placeholder="종목 코드 또는 영어 이름 (예: 005930.KS, AAPL, apple)" style="flex:1;min-width:240px" autocomplete="off" list="stockSuggest">
+      <datalist id="stockSuggest"></datalist>
+      <select id="stockPeriod"><option value="6mo">6개월</option><option value="1y" selected>1년</option><option value="2y">2년</option><option value="5y">5년</option><option value="10y">10년</option></select>
+      <button class="btn primary">분석</button>
+    </form>
+    <div class="row" style="margin-top:10px" id="stockChips"></div>
+  </div>
+  <div id="stockOut"></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="tab-portfolio" hidden>
+  <h2>포트폴리오 최적화</h2>
+  <p class="sub">여러 종목을 섞었을 때의 수익과 위험을 비교하고, 같은 위험에서 수익이 가장 좋은 조합을 찾아봅니다. (Fincept의 Portfolio Optimization 화면을 단순화한 버전)</p>
+  <div class="panel" style="margin-bottom:14px">
+    <form id="pfForm" class="form-grid">
+      <div class="field" style="grid-column:1/-1"><label>종목 (쉼표로 구분, 2~10개)</label><input id="pfSyms" value="005930.KS, 000660.KS, AAPL, NVDA, GLD"></div>
+      <div class="field" style="grid-column:1/-1"><label>내 비중 (선택, 같은 순서로 · 비우면 생략)</label><input id="pfW" placeholder="예: 30, 20, 20, 20, 10"></div>
+      <div class="field"><label>기간</label><select id="pfPeriod"><option value="1y">1년</option><option value="2y" selected>2년</option><option value="5y">5년</option></select></div>
+      <div class="field"><label><span class="term" data-term="rf">무위험 이자율</span> (%)</label><input id="pfRf" type="number" step="0.1" value="3"></div>
+      <div class="field"><button class="btn primary">분석</button></div>
+    </form>
+    <div class="row" style="margin-top:10px">
+      <span class="muted small">예시:</span>
+      <button class="chip" data-pf="005930.KS, 000660.KS, 035420.KS, 005380.KS">국내 대형주</button>
+      <button class="chip" data-pf="AAPL, MSFT, NVDA, GOOGL, AMZN">미국 빅테크</button>
+      <button class="chip" data-pf="SPY, TLT, GLD, BTC-USD">주식·채권·금·코인</button>
+    </div>
+  </div>
+  <div id="pfOut"></div>
+</section>
+
+<!-- DCF -->
+<section id="tab-dcf" hidden>
+  <h2>DCF 가치평가</h2>
+  <p class="sub">기업이 앞으로 벌어들일 <span class="term" data-term="fcf">잉여현금흐름</span>을 오늘 가치로 할인해 "적정 주가"를 추정합니다. 종목을 불러오면 재무 데이터로 입력값이 자동으로 채워져요.</p>
+  <div class="panel" style="margin-bottom:14px">
+    <div class="row" style="margin-bottom:12px">
+      <input id="dcfSym" placeholder="종목 코드 (예: AAPL, 005930.KS)" style="flex:1;min-width:200px">
+      <button class="btn" id="dcfLoad">재무 데이터 불러오기</button>
+    </div>
+    <div id="dcfInfo" class="small muted" style="margin-bottom:10px"></div>
+    <form id="dcfForm" class="form-grid">
+      <div class="field"><label><span class="term" data-term="fcf">현재 FCF</span> (연간)</label><input id="d_fcf" type="number" value="1000000000" step="any"></div>
+      <div class="field"><label><span class="term" data-term="growth">성장률</span> (%/년)</label><input id="d_growth" type="number" value="8" step="0.1"></div>
+      <div class="field"><label>예측 기간 (년)</label><input id="d_years" type="number" value="5" min="1" max="15"></div>
+      <div class="field"><label><span class="term" data-term="wacc">할인율 WACC</span> (%)</label><input id="d_wacc" type="number" value="9" step="0.1"></div>
+      <div class="field"><label><span class="term" data-term="tg">영구 성장률</span> (%)</label><input id="d_tg" type="number" value="2.5" step="0.1"></div>
+      <div class="field"><label><span class="term" data-term="netdebt">순부채</span></label><input id="d_nd" type="number" value="0" step="any"></div>
+      <div class="field"><label>발행 주식 수</label><input id="d_sh" type="number" value="100000000" step="any"></div>
+      <div class="field"><label>현재 주가 (비교용)</label><input id="d_px" type="number" step="any" placeholder="선택"></div>
+      <div class="field"><button class="btn primary">계산</button></div>
+    </form>
+  </div>
+  <div id="dcfOut"></div>
+</section>
+
+<!-- OPTION -->
+<section id="tab-option" hidden>
+  <h2>옵션 계산기</h2>
+  <p class="sub"><span class="term" data-term="bsm">블랙-숄즈 모형</span>으로 옵션의 이론 가격과 <span class="term" data-term="greeks">그릭스</span>를 계산하고, 만기 손익 그래프를 그립니다. (Fincept의 Derivatives·QuantLib 화면 기능)</p>
+  <div class="panel" style="margin-bottom:14px">
+    <form id="optForm" class="form-grid">
+      <div class="field"><label>종류</label><select id="o_kind"><option value="call">콜 (오를 때 이익)</option><option value="put">풋 (내릴 때 이익)</option></select></div>
+      <div class="field"><label>포지션</label><select id="o_side"><option value="long">매수</option><option value="short">매도</option></select></div>
+      <div class="field"><label>기초자산 가격</label><input id="o_S" type="number" value="100" step="any"></div>
+      <div class="field"><label><span class="term" data-term="strike">행사가</span></label><input id="o_K" type="number" value="105" step="any"></div>
+      <div class="field"><label>만기까지 (일)</label><input id="o_days" type="number" value="60"></div>
+      <div class="field"><label><span class="term" data-term="iv">변동성</span> (%/년)</label><input id="o_sigma" type="number" value="25" step="0.1"></div>
+      <div class="field"><label><span class="term" data-term="rf">무위험 이자율</span> (%)</label><input id="o_r" type="number" value="3.5" step="0.1"></div>
+      <div class="field"><label>배당수익률 (%)</label><input id="o_q" type="number" value="0" step="0.1"></div>
+    </form>
+  </div>
+  <div id="optOut"></div>
+</section>
+
+<!-- MACRO -->
+<section id="tab-macro" hidden>
+  <h2>경제 지표</h2>
+  <p class="sub">세계은행 데이터로 나라별 경제 상황을 비교합니다. (Fincept의 Economics · DBnomics · 정부 데이터 화면 중 키 없이 쓰는 부분)</p>
+  <div class="panel" style="margin-bottom:14px">
+    <form id="macroForm" class="form-grid">
+      <div class="field" style="grid-column:span 2"><label>지표</label><select id="m_ind"></select></div>
+      <div class="field" style="grid-column:span 2"><label>국가 (ISO 코드, 쉼표 구분)</label><input id="m_c" value="KOR, USA, JPN, CHN, DEU"></div>
+      <div class="field"><label>기간</label><select id="m_y"><option value="10">10년</option><option value="20" selected>20년</option><option value="40">40년</option></select></div>
+      <div class="field"><button class="btn primary">불러오기</button></div>
+    </form>
+    <p class="small muted" style="margin:10px 0 0">국가 코드: KOR 한국 · USA 미국 · JPN 일본 · CHN 중국 · DEU 독일 · GBR 영국 · FRA 프랑스 · IND 인도 · VNM 베트남 · WLD 전 세계</p>
+  </div>
+  <div id="macroOut"></div>
+</section>
+
+<!-- FEATURES -->
+<section id="tab-features" hidden>
+  <h2>Fincept Terminal 전체 기능 안내</h2>
+  <p class="sub">데스크톱 앱(C++ / Qt6)에 들어 있는 화면들을 한국어로 정리했습니다. <span class="tag good">이 대시보드에서 체험 가능</span> 표시가 있는 기능은 위 탭에서 바로 써볼 수 있어요.</p>
+  <div class="row" style="margin-bottom:6px"><input id="featQ" placeholder="기능 검색 (예: 백테스트, 뉴스, 암호화폐)" style="flex:1;min-width:220px"></div>
+  <div id="featOut"><div class="loading">불러오는 중…</div></div>
+</section>
+</main>
+<div id="tip"></div>
+
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const SERIES = ["--s1", "--s2", "--s3", "--s4", "--s5", "--s6"];
+const charts = {};
+
+async function api(path, body) {
+  const r = await fetch(path, body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const d = await r.json().catch(() => ({ error: "서버 응답을 읽지 못했습니다." }));
+  if (!r.ok) throw new Error(d.error || r.statusText);
+  return d;
+}
+const pct = (v, d = 1) => v == null ? "-" : (v * 100).toFixed(d) + "%";
+const spct = (v, d = 1) => v == null ? "-" : (v > 0 ? "+" : "") + (v * 100).toFixed(d) + "%";
+const num = (v, d = 2) => v == null ? "-" : Number(v).toLocaleString("ko-KR", { maximumFractionDigits: d, minimumFractionDigits: d });
+function big(v, cur = "") {
+  if (v == null) return "-";
+  const a = Math.abs(v), s = v < 0 ? "-" : "";
+  const u = cur === "KRW" ? [[1e12, "조"], [1e8, "억"], [1e4, "만"]] : [[1e12, "T"], [1e9, "B"], [1e6, "M"], [1e3, "K"]];
+  for (const [n, l] of u) if (a >= n) return s + (a / n).toLocaleString("ko-KR", { maximumFractionDigits: 2 }) + l;
+  return s + a.toLocaleString("ko-KR", { maximumFractionDigits: 2 });
+}
+const err = (el, e) => el.innerHTML = `<div class="err">⚠ ${esc(e.message || e)}</div>`;
+const loading = (el, msg = "데이터를 불러오는 중…") => el.innerHTML = `<div class="loading">${msg}</div>`;
+
+// ---------------- glossary tooltips ----------------
+const TERMS = {
+  cagr: ["연평균 수익률 (CAGR)", "기간 전체 수익을 '매년 같은 비율로 불어났다면' 몇 %였는지로 환산한 값. 기간이 다른 투자끼리 비교할 때 써요."],
+  total: ["누적 수익률", "시작일에 사서 마지막 날까지 들고 있었다면 얻은 수익률이에요."],
+  vol: ["변동성", "가격이 얼마나 출렁이는지(일간 수익률의 표준편차를 1년 기준으로 환산). 높을수록 위험하고, 대형주는 보통 20~30%, 코인은 60% 이상이에요."],
+  sharpe: ["샤프 지수", "위험 한 단위당 얼마나 초과 수익을 냈는지. (수익률 − 무위험 이자율) ÷ 변동성. 1 이상이면 양호, 2 이상이면 매우 좋음, 0 미만이면 예금보다 못했다는 뜻."],
+  sortino: ["소르티노 지수", "샤프 지수와 비슷하지만 '떨어질 때의 출렁임'만 위험으로 봐요. 오를 때 크게 오르는 자산이 불이익을 받지 않습니다."],
+  mdd: ["최대 낙폭 (MDD)", "고점에서 저점까지 가장 크게 떨어졌던 비율. 최악의 시점에 샀다면 겪었을 손실이라 '버틸 수 있는 위험'을 가늠할 때 봐요."],
+  beta: ["베타", "시장(코스피·S&P500)이 1% 움직일 때 이 종목이 평균 몇 % 움직이는지. 1보다 크면 시장보다 공격적, 작으면 방어적이에요."],
+  rsi: ["RSI (상대강도지수)", "최근 14일 동안 오른 힘과 내린 힘의 비율(0~100). 70 이상이면 과열(과매수), 30 이하면 침체(과매도) 구간으로 봐요."],
+  ma: ["이동평균선", "최근 N일 종가의 평균. 주가가 20일선(단기)·60일선(중기) 위에 있으면 상승 추세로 해석하는 경우가 많아요."],
+  dd: ["낙폭 차트", "매일 '직전 최고점 대비 몇 % 아래에 있는지'를 그린 그래프. 0%면 신고가예요."],
+  per: ["PER (주가수익비율)", "주가 ÷ 주당순이익. 회사가 1년 버는 돈의 몇 배에 거래되는지. 낮을수록 싸 보이지만 성장주는 원래 높아요."],
+  pbr: ["PBR (주가순자산비율)", "주가 ÷ 주당순자산. 1 미만이면 회사를 청산했을 때 가치보다 싸게 거래된다는 뜻이에요."],
+  roe: ["ROE (자기자본이익률)", "주주가 맡긴 돈으로 1년에 몇 %를 벌었는지. 15% 이상이면 우수한 편이에요."],
+  margin: ["영업이익률", "매출 100원 중 본업으로 남긴 이익. 높을수록 경쟁력이 강하다고 봐요."],
+  de: ["부채비율", "자기자본 대비 부채(%). 100을 넘으면 빚이 자본보다 많다는 뜻이에요."],
+  div: ["배당수익률", "주가 대비 1년 배당금 비율. 예금 이자와 비교해 볼 수 있어요."],
+  mcap: ["시가총액", "주가 × 발행 주식 수. 회사 전체를 사려면 드는 값이에요."],
+  corr: ["상관계수", "두 자산이 같이 움직이는 정도(−1~1). 1에 가까우면 같이 오르내리고, 0이나 음수면 서로 위험을 상쇄해 분산 효과가 커요."],
+  frontier: ["효율적 투자선", "같은 위험(변동성)에서 가장 높은 수익을 내는 조합들의 경계선. 점구름의 왼쪽 위 가장자리예요."],
+  maxsharpe: ["최대 샤프 포트폴리오", "위험 대비 수익(샤프 지수)이 가장 높은 비중 조합."],
+  minvol: ["최소 변동성 포트폴리오", "수익과 상관없이 출렁임이 가장 작은 비중 조합. 안정성을 원할 때 참고해요."],
+  rf: ["무위험 이자율", "위험 없이 얻을 수 있는 수익률(예: 국채 금리). 샤프 지수와 옵션 가격 계산의 기준이 돼요."],
+  fcf: ["잉여현금흐름 (FCF)", "영업으로 번 현금에서 설비 투자를 빼고 남은 돈. 주주·채권자에게 돌려줄 수 있는 '진짜 남는 돈'이에요."],
+  growth: ["성장률", "예측 기간 동안 FCF가 매년 늘어날 것으로 가정하는 비율."],
+  wacc: ["할인율 (WACC)", "미래의 돈을 오늘 가치로 바꿀 때 쓰는 이자율. 회사가 자금을 조달하는 평균 비용으로, 위험한 회사일수록 높아요. 1%p만 바뀌어도 결과가 크게 달라집니다."],
+  tg: ["영구 성장률", "예측 기간 이후 영원히 성장한다고 가정하는 비율. 보통 장기 경제성장률(2~3%)보다 높게 잡지 않아요."],
+  tv: ["잔존가치 (Terminal Value)", "예측 기간 이후 모든 현금흐름의 가치를 한 번에 합친 값. DCF 결과의 대부분을 차지하는 경우가 많아 가정에 민감해요."],
+  ev: ["기업가치 (EV)", "미래 현금흐름의 현재가치 합. 여기서 순부채를 빼면 주주 몫인 자기자본가치가 돼요."],
+  netdebt: ["순부채", "총부채 − 보유 현금. 음수면 빚보다 현금이 많은 회사예요."],
+  bsm: ["블랙-숄즈 모형", "주가가 무작위로 움직인다는 가정 아래 옵션의 이론 가격을 구하는 1973년의 노벨상 공식."],
+  greeks: ["그릭스", "옵션 가격이 각 변수에 얼마나 민감한지 나타내는 지표들(델타·감마·베가·세타·로)."],
+  delta: ["델타", "기초자산이 1원 오를 때 옵션 가격이 변하는 양. 콜은 0~1, 풋은 −1~0. '만기에 이익일 확률'의 대략적인 감으로도 써요."],
+  gamma: ["감마", "기초자산이 1원 움직일 때 델타가 변하는 양. 행사가 근처·만기 직전에 커져요."],
+  vega: ["베가", "변동성이 1%p 오를 때 옵션 가격이 변하는 양."],
+  theta: ["세타", "하루가 지날 때 옵션 가격이 줄어드는 양(시간 가치 감소). 매수자에겐 비용, 매도자에겐 수익이에요."],
+  rho: ["로", "금리가 1%p 오를 때 옵션 가격이 변하는 양."],
+  strike: ["행사가", "만기에 기초자산을 사거나(콜) 팔(풋) 수 있는 약속 가격."],
+  iv: ["변동성 (시그마)", "기초자산이 1년 동안 출렁일 것으로 예상하는 정도. 옵션 가격에 가장 큰 영향을 줘요."],
+  be: ["손익분기점", "만기에 기초자산이 이 가격을 넘어서야(콜) / 밑돌아야(풋) 프리미엄을 회수해 이익이 나요."],
+  itm: ["만기 내가격 확률", "모형상 만기에 옵션이 행사 가치를 가질(이익 구간일 필요는 없음) 확률."],
+};
+const tip = $("#tip");
+document.addEventListener("mouseover", e => {
+  const t = e.target.closest("[data-term]"); if (!t) return;
+  const d = TERMS[t.dataset.term]; if (!d) return;
+  tip.innerHTML = `<b>${esc(d[0])}</b>${esc(d[1])}`; tip.classList.add("show");
+  const r = t.getBoundingClientRect(), w = Math.min(320, innerWidth - 24);
+  tip.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + "px";
+  const below = r.bottom + 8, h = tip.offsetHeight;
+  tip.style.top = (below + h > innerHeight ? r.top - h - 8 : below) + "px";
+});
+document.addEventListener("mouseout", e => { if (e.target.closest("[data-term]")) tip.classList.remove("show"); });
+const T = (key, label) => `<span class="term" data-term="${key}">${label}</span>`;
+
+// ---------------- tabs ----------------
+function showTab(name) {
+  if (!$("#tab-" + name)) name = "home";
+  $$("#nav button").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
+  $$("main > section").forEach(s => s.hidden = s.id !== "tab-" + name);
+  history.replaceState(null, "", "#" + name);
+  if (name === "features") loadFeatures();
+  if (name === "option") runOption();
+}
+$("#nav").addEventListener("click", e => { const b = e.target.closest("button"); if (b) showTab(b.dataset.tab); });
+
+const HOME = [
+  ["stock", "📈", "종목 분석", "삼성전자·애플 같은 종목의 가격 차트, 위험 지표, 재무 비율, 최신 뉴스"],
+  ["portfolio", "🧺", "포트폴리오", "여러 종목을 섞었을 때의 수익·위험, 최적 비중 찾기, 상관관계"],
+  ["dcf", "💰", "DCF 가치평가", "미래 현금흐름으로 적정 주가 추정, 할인율·성장률 민감도 표"],
+  ["option", "🎯", "옵션 계산기", "블랙-숄즈 가격과 그릭스, 만기 손익 그래프"],
+  ["macro", "🌍", "경제 지표", "GDP 성장률·물가·실업률 등 나라별 비교"],
+  ["features", "🧭", "전체 기능 안내", "데스크톱 앱의 모든 화면이 무엇을 하는지 한국어 설명"],
+];
+$("#homeCards").innerHTML = HOME.map(([id, ico, t, d]) => `
+  <div class="panel card-link feat" data-goto="${id}"><div class="ico">${ico}</div><h3 style="margin:0">${t}</h3><div class="muted small">${d}</div></div>`).join("");
+$("#homeCards").addEventListener("click", e => { const c = e.target.closest("[data-goto]"); if (c) showTab(c.dataset.goto); });
+
+// ---------------- chart helpers ----------------
+Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+function themeChart() {
+  Chart.defaults.color = css("--muted");
+  Chart.defaults.borderColor = css("--grid");
+}
+function mkChart(id, cfg) {
+  themeChart();
+  charts[id]?.destroy();
+  charts[id] = new Chart(document.getElementById(id), cfg);
+  return charts[id];
+}
+const baseOpts = (extra = {}) => ({
+  responsive: true, maintainAspectRatio: false, animation: false,
+  interaction: { mode: "index", intersect: false },
+  plugins: { legend: { display: false }, tooltip: { backgroundColor: css("--text"), titleColor: css("--bg"), bodyColor: css("--bg") } },
+  scales: { x: { ticks: { maxTicksLimit: 7, maxRotation: 0, autoSkipPadding: 24 }, grid: { display: false } }, y: { grid: { color: css("--grid") } } },
+  ...extra,
+});
+const line = (label, data, color, extra = {}) => ({ label, data, borderColor: color, backgroundColor: color, borderWidth: 2, pointRadius: 0, tension: .15, spanGaps: true, ...extra });
+
+// ---------------- stock ----------------
+const STOCK_CHIPS = [["삼성전자", "005930.KS"], ["SK하이닉스", "000660.KS"], ["NAVER", "035420.KS"], ["애플", "AAPL"], ["엔비디아", "NVDA"], ["테슬라", "TSLA"], ["코스피", "^KS11"], ["S&P 500", "^GSPC"], ["비트코인", "BTC-USD"]];
+$("#stockChips").innerHTML = `<span class="muted small">빠른 선택:</span>` + STOCK_CHIPS.map(([n, s]) => `<button class="chip" data-sym="${s}">${n}</button>`).join("");
+$("#stockChips").addEventListener("click", e => { const b = e.target.closest("[data-sym]"); if (b) { $("#stockSym").value = b.dataset.sym; runStock(); } });
+$("#stockForm").addEventListener("submit", e => { e.preventDefault(); runStock(); });
+let suggestT;
+$("#stockSym").addEventListener("input", e => {
+  clearTimeout(suggestT); const q = e.target.value.trim();
+  if (q.length < 2 || /\.(KS|KQ)$/i.test(q)) return;
+  suggestT = setTimeout(async () => {
+    try {
+      const r = await api("/api/search?q=" + encodeURIComponent(q));
+      $("#stockSuggest").innerHTML = r.results.map(x => `<option value="${esc(x.symbol)}">${esc(x.name || x.shortname || "")} · ${esc(x.exchange || "")}</option>`).join("");
+    } catch {}
+  }, 350);
+});
+
+function judge(kind, v) {
+  if (v == null) return ["neutral", "-"];
+  switch (kind) {
+    case "sharpe": return v >= 1 ? ["good", "양호"] : v >= 0.3 ? ["mid", "보통"] : ["bad", "부진"];
+    case "vol": return v < 0.2 ? ["good", "안정적"] : v < 0.4 ? ["mid", "보통"] : ["bad", "출렁임 큼"];
+    case "mdd": return v > -0.15 ? ["good", "낙폭 작음"] : v > -0.35 ? ["mid", "보통"] : ["bad", "낙폭 큼"];
+    case "rsi": return v >= 70 ? ["bad", "과열 구간"] : v <= 30 ? ["good", "침체 구간"] : ["neutral", "중립"];
+    case "beta": return v > 1.2 ? ["bad", "시장보다 공격적"] : v < 0.8 ? ["good", "방어적"] : ["neutral", "시장과 비슷"];
+    case "ret": return v > 0 ? ["good", "수익"] : ["bad", "손실"];
+  }
+}
+const statCard = (label, value, j, cls = "") => `<div class="stat"><span class="k">${label}</span><span class="v ${cls}">${value}</span>${j ? `<span class="tag ${j[0]}">${j[1]}</span>` : ""}</div>`;
+
+async function runStock() {
+  const sym = $("#stockSym").value.trim(); if (!sym) return;
+  const out = $("#stockOut"); loading(out, `${esc(sym)} 데이터를 불러오는 중… (처음엔 몇 초 걸려요)`);
+  try {
+    const d = await api(`/api/stock?symbol=${encodeURIComponent(sym)}&period=${$("#stockPeriod").value}`);
+    renderStock(d);
+    loadNews(d.symbol);
+  } catch (e) { err(out, e); }
+}
+function renderStock(d) {
+  const s = d.stats, q = d.quote, p = d.profile || {}, r = d.ratios || {};
+  const cur = p.currency || "";
+  const chg = q?.change_percent;
+  const ma = s.above_ma20 == null ? "-" : `${s.above_ma20 ? "20일선 위" : "20일선 아래"} · ${s.above_ma60 == null ? "" : s.above_ma60 ? "60일선 위" : "60일선 아래"}`;
+  $("#stockOut").innerHTML = `
+  <div class="panel" style="margin-bottom:14px">
+    <div class="row" style="align-items:baseline">
+      <h3 style="margin:0;font-size:19px">${esc(p.companyName || d.symbol)}</h3><span class="muted">${esc(d.symbol)} · ${esc(p.exchange || q?.exchange || "")}</span>
+      <span class="spacer"></span>
+      ${q ? `<span style="font-size:24px;font-weight:800">${num(q.price, 2)} <small class="muted" style="font-size:13px">${esc(cur)}</small></span>
+      <span class="${chg >= 0 ? "up" : "down"}" style="font-weight:800">${chg >= 0 ? "▲" : "▼"} ${num(Math.abs(q.change), 2)} (${chg > 0 ? "+" : ""}${num(chg, 2)}%)</span>` : ""}
+    </div>
+    ${p.sector ? `<div class="muted small" style="margin-top:4px">${esc(p.sector)} · ${esc(p.industry)} · ${T("mcap", "시가총액")} ${big(p.marketCap, cur)} ${esc(cur)}</div>` : ""}
+  </div>
+  <div class="grid g4" style="margin-bottom:14px">
+    ${statCard(T("total", "누적 수익률"), spct(s.total_return), judge("ret", s.total_return), s.total_return >= 0 ? "up" : "down")}
+    ${statCard(T("cagr", "연평균 수익률"), spct(s.cagr), null)}
+    ${statCard(T("vol", "변동성 (연)"), pct(s.volatility), judge("vol", s.volatility))}
+    ${statCard(T("sharpe", "샤프 지수"), num(s.sharpe), judge("sharpe", s.sharpe))}
+    ${statCard(T("mdd", "최대 낙폭"), pct(s.max_drawdown), judge("mdd", s.max_drawdown), "down")}
+    ${statCard(T("beta", "베타") + ` <span class="muted">vs ${esc(d.benchmark)}</span>`, num(s.beta), judge("beta", s.beta))}
+    ${statCard(T("rsi", "RSI (14일)"), num(s.rsi, 1), judge("rsi", s.rsi))}
+    ${statCard(T("ma", "추세"), `<span style="font-size:14px;white-space:normal;line-height:1.4;display:block">${ma}</span>`, null)}
+  </div>
+  <div class="panel" style="margin-bottom:14px">
+    <div class="row"><h3 style="margin:0">가격과 ${T("ma", "이동평균선")}</h3><span class="spacer"></span>
+      <div class="legend"><span><i style="background:${css("--s1")}"></i>종가</span><span><i style="background:${css("--s2")}"></i>20일선</span><span><i style="background:${css("--s3")}"></i>60일선</span></div></div>
+    <div class="chart-box"><canvas id="cPrice"></canvas></div>
+  </div>
+  <div class="grid g2" style="margin-bottom:14px">
+    <div class="panel"><h3>${T("dd", "고점 대비 낙폭")}</h3><div class="chart-box sm"><canvas id="cDD"></canvas></div></div>
+    <div class="panel"><h3>${T("rsi", "RSI")} <span class="muted small">70↑ 과열 · 30↓ 침체</span></h3><div class="chart-box sm"><canvas id="cRSI"></canvas></div></div>
+  </div>
+  <div class="grid g2">
+    <div class="panel scroll-x"><h3>재무 비율</h3>${r.symbol ? `<table>
+      <tr><td>${T("per", "PER")}</td><td>${num(r.peRatio, 1)}</td><td>예상 PER</td><td>${num(r.forwardPE, 1)}</td></tr>
+      <tr><td>${T("pbr", "PBR")}</td><td>${num(r.priceToBook, 2)}</td><td>${T("roe", "ROE")}</td><td>${pct(r.returnOnEquity)}</td></tr>
+      <tr><td>${T("margin", "영업이익률")}</td><td>${pct(r.operatingMargin)}</td><td>순이익률</td><td>${pct(r.profitMargin)}</td></tr>
+      <tr><td>${T("de", "부채비율")}</td><td>${num(r.debtToEquity, 1)}%</td><td>${T("div", "배당수익률")}</td><td>${r.dividendYield ? num(r.dividendYield > 1 ? r.dividendYield : r.dividendYield * 100, 2) + "%" : "-"}</td></tr>
+    </table>` : `<p class="muted">지수·코인 등은 재무 비율이 없습니다.</p>`}
+    ${p.description ? `<details style="margin-top:12px"><summary>회사 소개 (영문)</summary><p class="small muted">${esc(p.description)}</p></details>` : ""}</div>
+    <div class="panel news"><h3>최신 뉴스</h3><div id="newsOut" class="muted">불러오는 중…</div></div>
+  </div>`;
+  const c = d.chart;
+  mkChart("cPrice", { type: "line", data: { labels: c.dates, datasets: [line("종가", c.close, css("--s1")), line("20일선", c.ma20, css("--s2"), { borderWidth: 1.3 }), line("60일선", c.ma60, css("--s3"), { borderWidth: 1.3 })] }, options: baseOpts() });
+  mkChart("cDD", { type: "line", data: { labels: c.dates, datasets: [line("낙폭", c.drawdown.map(v => v * 100), css("--down"), { fill: true, backgroundColor: css("--down") + "33", borderWidth: 1.4 })] },
+    options: baseOpts({ scales: { x: { ticks: { maxTicksLimit: 6, maxRotation: 0 }, grid: { display: false } }, y: { ticks: { callback: v => v + "%" }, grid: { color: css("--grid") } } } }) });
+  mkChart("cRSI", { type: "line", data: { labels: c.dates, datasets: [line("RSI", c.rsi, css("--s4"), { borderWidth: 1.4 }), line("70", c.dates.map(() => 70), css("--up"), { borderDash: [4, 4], borderWidth: 1 }), line("30", c.dates.map(() => 30), css("--down"), { borderDash: [4, 4], borderWidth: 1 })] },
+    options: baseOpts({ scales: { x: { ticks: { maxTicksLimit: 6, maxRotation: 0 }, grid: { display: false } }, y: { min: 0, max: 100, grid: { color: css("--grid") } } } }) });
+}
+async function loadNews(sym) {
+  try {
+    const r = await api("/api/news?symbol=" + encodeURIComponent(sym));
+    const a = r.articles || [];
+    $("#newsOut").innerHTML = a.length ? `<ul>${a.map(n => `<li><a href="${esc(/^https?:/.test(n.url) ? n.url : "#")}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a><div class="small muted">${esc(n.publisher)} · ${esc((n.published_date || "").slice(0, 10))}</div></li>`).join("")}</ul>` : "관련 뉴스가 없습니다.";
+  } catch { const el = $("#newsOut"); if (el) el.textContent = "뉴스를 불러오지 못했습니다."; }
+}
+
+// ---------------- portfolio ----------------
+$$("[data-pf]").forEach(b => b.onclick = () => { $("#pfSyms").value = b.dataset.pf; $("#pfW").value = ""; runPf(); });
+$("#pfForm").addEventListener("submit", e => { e.preventDefault(); runPf(); });
+const PF_LABEL = { equal: "똑같이 나누기", max_sharpe: "최대 샤프", min_vol: "최소 변동성", custom: "내 비중" };
+const PF_TERM = { max_sharpe: "maxsharpe", min_vol: "minvol" };
+async function runPf() {
+  const out = $("#pfOut"); loading(out, "가격을 모으고 6,000가지 비중 조합을 계산하는 중…");
+  const symbols = $("#pfSyms").value.split(/[,\s]+/).filter(Boolean);
+  const w = $("#pfW").value.trim() ? $("#pfW").value.split(/[,\s]+/).filter(Boolean).map(Number) : null;
+  try {
+    const d = await api("/api/portfolio", { symbols, period: $("#pfPeriod").value, rf: (+$("#pfRf").value || 0) / 100, weights: w });
+    renderPf(d);
+  } catch (e) { err(out, e); }
+}
+function renderPf(d) {
+  const colors = d.symbols.map((_, i) => css(SERIES[i % SERIES.length]));
+  const keys = Object.keys(d.portfolios);
+  const pcol = { equal: css("--muted"), max_sharpe: css("--s1"), min_vol: css("--s3"), custom: css("--s4") };
+  const best = d.portfolios.max_sharpe;
+  $("#pfOut").innerHTML = `
+  <div class="note" style="margin-bottom:14px">💡 <b>한 줄 요약</b> — 과거 ${d.dates.length}거래일 기준, 위험 대비 수익이 가장 좋았던 비중은
+    ${d.symbols.map((s, i) => `<b>${esc(s)} ${pct(best.weights[i], 0)}</b>`).join(", ")} 였고, 이때 연 수익률 ${pct(best.ret)}, 변동성 ${pct(best.vol)}, 최대 낙폭 ${pct(best.max_drawdown)} 입니다. 과거 결과일 뿐 미래를 보장하지 않아요.</div>
+  <div class="grid g2" style="margin-bottom:14px">
+    <div class="panel"><h3>위험 vs 수익 — ${T("frontier", "효율적 투자선")}</h3>
+      <div class="legend" style="margin-bottom:6px">${keys.map(k => `<span><i style="background:${pcol[k]}"></i>${PF_LABEL[k]}</span>`).join("")}<span><i style="background:${css("--border")}"></i>무작위 조합</span></div>
+      <div class="chart-box"><canvas id="cCloud"></canvas></div></div>
+    <div class="panel"><h3>1원을 투자했다면</h3>
+      <div class="legend" style="margin-bottom:6px">${keys.map(k => `<span><i style="background:${pcol[k]}"></i>${PF_LABEL[k]}</span>`).join("")}</div>
+      <div class="chart-box"><canvas id="cCurve"></canvas></div></div>
+  </div>
+  <div class="panel" style="margin-bottom:14px"><h3>비중 비교</h3>
+    ${keys.map(k => { const p = d.portfolios[k]; return `
+      <div style="margin-bottom:12px"><div class="row small" style="margin-bottom:4px"><b>${PF_TERM[k] ? T(PF_TERM[k], PF_LABEL[k]) : PF_LABEL[k]}</b><span class="spacer"></span>
+        <span class="muted">수익 ${pct(p.ret)} · 변동성 ${pct(p.vol)} · ${T("sharpe", "샤프")} ${num(p.sharpe)} · ${T("mdd", "MDD")} ${pct(p.max_drawdown)}</span></div>
+        <div class="weights">${p.weights.map((w, i) => w > 0.001 ? `<div style="flex:${w};background:${colors[i]}" title="${esc(d.symbols[i])} ${pct(w)}">${w > .07 ? esc(d.symbols[i]) + " " + pct(w, 0) : ""}</div>` : "").join("")}</div></div>`; }).join("")}
+  </div>
+  <div class="grid g2">
+    <div class="panel scroll-x"><h3>종목별 성과</h3><table><tr><th>종목</th><th>${T("cagr", "연수익")}</th><th>${T("vol", "변동성")}</th><th>${T("sharpe", "샤프")}</th><th>${T("mdd", "MDD")}</th></tr>
+      ${d.assets.map((a, i) => `<tr><td><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${colors[i]};margin-right:6px"></i>${esc(a.symbol)}</td><td class="${a.cagr >= 0 ? "up" : "down"}">${spct(a.cagr)}</td><td>${pct(a.volatility)}</td><td>${num(a.sharpe)}</td><td>${pct(a.max_drawdown)}</td></tr>`).join("")}</table></div>
+    <div class="panel scroll-x"><h3>${T("corr", "상관계수")} <span class="muted small">낮을수록 분산 효과 ↑</span></h3><table class="heat"><tr><th></th>${d.symbols.map(s => `<th style="text-align:center">${esc(s)}</th>`).join("")}</tr>
+      ${d.correlation.map((row, i) => `<tr><td style="text-align:left">${esc(d.symbols[i])}</td>${row.map(v => `<td style="background:color-mix(in srgb, ${v >= 0 ? css("--up") : css("--down")} ${Math.round(Math.abs(v) * 55)}%, transparent)">${num(v)}</td>`).join("")}</tr>`).join("")}</table></div>
+  </div>`;
+  const cl = d.cloud;
+  mkChart("cCloud", { type: "scatter", data: { datasets: [
+      ...keys.map(k => ({ label: PF_LABEL[k], data: [{ x: d.portfolios[k].vol * 100, y: d.portfolios[k].ret * 100 }], backgroundColor: pcol[k], pointRadius: 8, pointStyle: "rectRot" })),
+      { label: "무작위 조합", data: cl.vol.map((v, i) => ({ x: v * 100, y: cl.ret[i] * 100 })), backgroundColor: css("--muted") + "40", pointRadius: 2 },
+    ] }, options: baseOpts({ interaction: { mode: "nearest", intersect: true }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.dataset.label}: 변동성 ${c.parsed.x.toFixed(1)}%, 수익 ${c.parsed.y.toFixed(1)}%` } } },
+      scales: { x: { title: { display: true, text: "변동성 (연, %)" }, grid: { color: css("--grid") } }, y: { title: { display: true, text: "기대 수익률 (연, %)" }, grid: { color: css("--grid") } } } }) });
+  mkChart("cCurve", { type: "line", data: { labels: d.dates, datasets: keys.map(k => line(PF_LABEL[k], d.portfolios[k].curve, pcol[k], { borderWidth: k === "max_sharpe" ? 2.4 : 1.5 })) }, options: baseOpts() });
+}
+
+// ---------------- dcf ----------------
+$("#dcfLoad").onclick = async () => {
+  const sym = $("#dcfSym").value.trim(); if (!sym) return;
+  const info = $("#dcfInfo"); info.textContent = "불러오는 중…";
+  try {
+    const d = await api("/api/dcf/prefill?symbol=" + encodeURIComponent(sym));
+    if (d.fcf != null) $("#d_fcf").value = Math.round(d.fcf);
+    $("#d_growth").value = (d.growth * 100).toFixed(1);
+    $("#d_wacc").value = (d.wacc * 100).toFixed(1);
+    $("#d_tg").value = (d.terminal_growth * 100).toFixed(1);
+    $("#d_nd").value = Math.round(d.net_debt || 0);
+    if (d.shares) $("#d_sh").value = Math.round(d.shares);
+    $("#d_px").value = d.price ?? "";
+    info.innerHTML = `<b>${esc(d.name)}</b> 재무 데이터를 채웠어요 (재무 통화: ${esc(d.currency)}${d.price_currency && d.price_currency !== d.currency ? `, 주가 통화: ${esc(d.price_currency)} — 통화가 달라 비교에 주의` : ""}).
+      할인율은 베타 ${num(d.beta)} 기반 단순 추정(4% + 베타×5.5%), 성장률은 최근 이익/매출 성장률이라 직접 조정해 보세요.${d.fcf == null ? " ⚠ FCF 데이터가 없어 직접 입력해야 합니다." : ""}`;
+    runDcf();
+  } catch (e) { info.innerHTML = `<span class="err" style="display:inline-block;padding:4px 9px">${esc(e.message)}</span>`; }
+};
+$("#dcfForm").addEventListener("submit", e => { e.preventDefault(); runDcf(); });
+async function runDcf() {
+  const v = id => +$(id).value;
+  const out = $("#dcfOut");
+  try {
+    const d = await api("/api/dcf", { fcf: v("#d_fcf"), growth: v("#d_growth") / 100, years: v("#d_years"), wacc: v("#d_wacc") / 100, terminal_growth: v("#d_tg") / 100, net_debt: v("#d_nd"), shares: v("#d_sh") });
+    const px = +$("#d_px").value || null;
+    const up = px ? d.per_share / px - 1 : null;
+    const j = up == null ? null : up > 0.15 ? ["good", "저평가 가능성"] : up < -0.15 ? ["bad", "고평가 가능성"] : ["neutral", "적정 범위"];
+    out.innerHTML = `
+    <div class="grid g4" style="margin-bottom:14px">
+      ${statCard("주당 적정가치", num(d.per_share, 2), j)}
+      ${statCard("현재 주가 대비", up == null ? "-" : spct(up), null, up >= 0 ? "up" : "down")}
+      ${statCard(T("ev", "기업가치 (EV)"), big(d.enterprise_value), null)}
+      ${statCard("자기자본가치", big(d.equity_value), null)}
+      ${statCard(T("tv", "잔존가치 비중"), pct(d.tv_share), d.tv_share > .8 ? ["mid", "가정에 민감"] : null)}
+    </div>
+    <div class="grid g2">
+      <div class="panel"><h3>연도별 현금흐름</h3><div class="legend" style="margin-bottom:6px"><span><i style="background:${css("--s2")}"></i>예상 FCF</span><span><i style="background:${css("--s1")}"></i>현재가치로 할인</span></div><div class="chart-box sm"><canvas id="cDcf"></canvas></div>
+        <p class="small muted">먼 미래의 돈일수록 할인이 커져 막대가 짧아집니다. 예측 기간 이후 가치(${T("tv", "잔존가치")})는 현재가치로 ${big(d.pv_terminal)}입니다.</p></div>
+      <div class="panel scroll-x"><h3>민감도 표 <span class="muted small">주당 가치 · 세로: ${T("wacc", "WACC")} · 가로: ${T("tg", "영구 성장률")}</span></h3>
+        <table class="heat"><tr><th></th>${d.sensitivity.tg.map(t => `<th style="text-align:center">${pct(t)}</th>`).join("")}</tr>
+        ${d.sensitivity.values.map((row, i) => `<tr><td style="text-align:left;font-weight:700">${pct(d.sensitivity.wacc[i])}</td>${row.map((x, k) => {
+          const rel = px && x != null ? x / px - 1 : 0, c = rel >= 0 ? css("--ok") : css("--bad");
+          return `<td style="${i === 2 && k === 2 ? "outline:2px solid " + css("--accent") + ";" : ""}background:color-mix(in srgb, ${c} ${px ? Math.min(55, Math.round(Math.abs(rel) * 90)) : 0}%, transparent)">${x == null ? "-" : num(x, 0)}</td>`; }).join("")}</tr>`).join("")}</table>
+        <p class="small muted">${px ? "초록 = 현재 주가보다 높음, 빨강 = 낮음. " : ""}가운데 테두리가 현재 가정이에요. 할인율이 조금만 바뀌어도 결과가 크게 달라지는 걸 확인해 보세요.</p></div>
+    </div>`;
+    mkChart("cDcf", { type: "bar", data: { labels: d.flows.map(f => f.year + "년차"), datasets: [
+      { label: "예상 FCF", data: d.flows.map(f => f.fcf), backgroundColor: css("--s2") }, { label: "현재가치", data: d.flows.map(f => f.pv), backgroundColor: css("--s1") }] },
+      options: baseOpts({ scales: { x: { grid: { display: false } }, y: { ticks: { callback: v => big(v) }, grid: { color: css("--grid") } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${big(c.parsed.y)}` } } } }) });
+  } catch (e) { err(out, e); }
+}
+
+// ---------------- option ----------------
+let optT;
+$("#optForm").addEventListener("input", () => { clearTimeout(optT); optT = setTimeout(runOption, 250); });
+$("#optForm").addEventListener("submit", e => { e.preventDefault(); runOption(); });
+async function runOption() {
+  const v = id => +$(id).value;
+  const out = $("#optOut");
+  const side = $("#o_side").value, kind = $("#o_kind").value;
+  try {
+    const d = await api("/api/option", { kind, side, S: v("#o_S"), K: v("#o_K"), days: v("#o_days"), sigma: v("#o_sigma") / 100, r: v("#o_r") / 100, q: v("#o_q") / 100 });
+    const sgn = side === "long" ? 1 : -1;
+    out.innerHTML = `
+    <div class="grid g4" style="margin-bottom:14px">
+      ${statCard("옵션 이론가 (프리미엄)", num(d.price, 3), null)}
+      ${statCard(T("be", "손익분기점"), num(d.breakeven, 2), null)}
+      ${statCard(T("itm", "만기 내가격 확률"), pct(d.prob_itm), null)}
+      ${statCard(T("delta", "델타"), num(d.delta == null ? null : d.delta * sgn, 3), null)}
+      ${statCard(T("gamma", "감마"), num(d.gamma == null ? null : d.gamma * sgn, 4), null)}
+      ${statCard(T("vega", "베가") + " <span class='muted'>/1%p</span>", num(d.vega == null ? null : d.vega * sgn, 3), null)}
+      ${statCard(T("theta", "세타") + " <span class='muted'>/1일</span>", num(d.theta == null ? null : d.theta * sgn, 4), null, d.theta * sgn < 0 ? "down" : "up")}
+      ${statCard(T("rho", "로") + " <span class='muted'>/1%p</span>", num(d.rho == null ? null : d.rho * sgn, 4), null)}
+    </div>
+    <div class="panel"><div class="row"><h3 style="margin:0">손익 그래프 <span class="muted small">(1주/1계약 기준)</span></h3><span class="spacer"></span>
+      <div class="legend"><span><i style="background:${css("--s1")}"></i>만기 시점</span><span><i style="background:${css("--s2")}"></i>오늘 기준 (시간 가치 포함)</span></div></div>
+      <div class="chart-box"><canvas id="cOpt"></canvas></div>
+      <p class="small muted">${side === "long" ? "매수는 손실이 프리미엄으로 제한되고" : "매도는 프리미엄만큼 이익이 제한되고"} ${side === "long" ? (kind === "call" ? "가격이 오를수록 이익이 커집니다." : "가격이 내릴수록 이익이 커집니다.") : (kind === "call" ? "가격이 크게 오르면 손실이 무한히 커질 수 있어요." : "가격이 크게 내리면 손실이 커질 수 있어요.")}</p></div>`;
+    const c = d.curve;
+    mkChart("cOpt", { type: "line", data: { labels: c.x.map(x => num(x, 1)), datasets: [line("만기 손익", c.expiry, css("--s1")), line("오늘 손익", c.today, css("--s2"), { borderDash: [5, 4], borderWidth: 1.6 }), line("0", c.x.map(() => 0), css("--muted"), { borderWidth: 1 })] },
+      options: baseOpts({ scales: { x: { title: { display: true, text: "만기 시 기초자산 가격" }, ticks: { maxTicksLimit: 9, maxRotation: 0 }, grid: { display: false } }, y: { title: { display: true, text: "손익" }, grid: { color: css("--grid") } } } }) });
+  } catch (e) { err(out, e); }
+}
+
+// ---------------- macro ----------------
+const COUNTRY_KO = { KR: "한국", US: "미국", JP: "일본", CN: "중국", DE: "독일", GB: "영국", FR: "프랑스", IN: "인도", VN: "베트남", "1W": "전 세계", IT: "이탈리아", CA: "캐나다", AU: "호주", BR: "브라질", RU: "러시아", TW: "대만", SG: "싱가포르", ID: "인도네시아", MX: "멕시코", ES: "스페인", CH: "스위스", NL: "네덜란드", SA: "사우디아라비아", TR: "튀르키예" };
+const INDICATORS = [["NY.GDP.MKTP.KD.ZG", "GDP 성장률 (%)"], ["FP.CPI.TOTL.ZG", "물가상승률 (CPI, %)"], ["SL.UEM.TOTL.ZS", "실업률 (%)"], ["NY.GDP.PCAP.CD", "1인당 GDP (달러)"],
+  ["NY.GDP.MKTP.CD", "GDP 규모 (달러)"], ["NE.EXP.GNFS.ZS", "수출 비중 (GDP 대비 %)"], ["GC.DOD.TOTL.GD.ZS", "정부부채 (GDP 대비 %)"], ["FR.INR.RINR", "실질금리 (%)"], ["SP.POP.TOTL", "인구"], ["SP.DYN.TFRT.IN", "합계출산율"]];
+$("#m_ind").innerHTML = INDICATORS.map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+$("#macroForm").addEventListener("submit", e => { e.preventDefault(); runMacro(); });
+async function runMacro() {
+  const out = $("#macroOut"); loading(out, "세계은행 데이터를 불러오는 중…");
+  const label = $("#m_ind").selectedOptions[0].textContent;
+  try {
+    const d = await api(`/api/macro?indicator=${$("#m_ind").value}&countries=${encodeURIComponent($("#m_c").value)}&years=${$("#m_y").value}`);
+    if (!d.series.length) throw new Error("데이터가 없습니다. 국가 코드를 확인하세요.");
+    d.series.forEach(s => { if (COUNTRY_KO[s.id]) s.name = COUNTRY_KO[s.id]; });
+    const years = [...new Set(d.series.flatMap(s => s.dates))].sort();
+    const isBig = d.series.some(s => s.values.some(v => Math.abs(v) > 1e6));
+    out.innerHTML = `<div class="panel" style="margin-bottom:14px"><h3>${esc(label)}</h3><div class="legend" style="margin-bottom:6px">${d.series.map((s, i) => `<span><i style="background:${css(SERIES[i % 6])}"></i>${esc(s.name)}</span>`).join("")}</div>
+      <div class="chart-box"><canvas id="cMacro"></canvas></div><p class="small muted">원 지표: ${esc(d.indicator_name)} (${esc(d.indicator)}) · 최신 연도는 아직 발표되지 않았을 수 있어요.</p></div>
+      <div class="panel scroll-x"><h3>최근 값</h3><table><tr><th>국가</th>${years.slice(-6).map(y => `<th>${y}</th>`).join("")}</tr>
+      ${d.series.map(s => `<tr><td>${esc(s.name)}</td>${years.slice(-6).map(y => { const i = s.dates.indexOf(y); return `<td>${i < 0 ? "-" : isBig ? big(s.values[i]) : num(s.values[i], 2)}</td>`; }).join("")}</tr>`).join("")}</table></div>`;
+    mkChart("cMacro", { type: "line", data: { labels: years, datasets: d.series.map((s, i) => line(s.name, years.map(y => { const k = s.dates.indexOf(y); return k < 0 ? null : s.values[k]; }), css(SERIES[i % 6]), { pointRadius: 2 })) },
+      options: baseOpts({ scales: { x: { grid: { display: false } }, y: { ticks: { callback: v => isBig ? big(v) : v }, grid: { color: css("--grid") } } } }) });
+  } catch (e) { err(out, e); }
+}
+
+// ---------------- features ----------------
+let FEATURES = null;
+async function loadFeatures() {
+  if (!FEATURES) { try { FEATURES = await api("/api/features"); } catch (e) { return err($("#featOut"), e); } }
+  renderFeatures();
+}
+$("#featQ").addEventListener("input", renderFeatures);
+function renderFeatures() {
+  if (!FEATURES) return;
+  const q = $("#featQ").value.trim().toLowerCase();
+  const list = FEATURES.filter(f => !q || JSON.stringify(f).toLowerCase().includes(q));
+  const cats = [];
+  list.forEach(f => { let c = cats.find(x => x.name === f.category); if (!c) cats.push(c = { name: f.category, items: [] }); c.items.push(f); });
+  $("#featOut").innerHTML = list.length ? cats.map(c => `<div class="cat-title">${esc(c.name)} · ${c.items.length}</div><div class="grid g3">${c.items.map(f => `
+    <div class="panel feat ${f.easy_tab ? "card-link" : ""}" ${f.easy_tab ? `data-goto="${f.easy_tab}"` : ""}>
+      <div class="row"><h3 style="margin:0">${esc(f.name_ko)}</h3><span class="muted small">${esc(f.name)}</span></div>
+      ${f.easy_tab ? `<span class="tag good">이 대시보드에서 체험 가능 →</span>` : ""}
+      <div class="small">${esc(f.summary)}</div>
+      <ul>${(f.features || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="needs muted">필요한 것: ${esc(f.needs)}</div>
+    </div>`).join("")}</div>`).join("") : `<div class="loading">검색 결과가 없습니다.</div>`;
+}
+$("#featOut").addEventListener("click", e => { const c = e.target.closest("[data-goto]"); if (c) showTab(c.dataset.goto); });
+
+// ---------------- boot ----------------
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => location.reload());
+{
+  const [tab, arg] = decodeURIComponent(location.hash.slice(1)).split("/");
+  showTab(tab || "home");
+  if (tab === "stock" && arg) { $("#stockSym").value = arg; runStock(); }
+  if (tab === "portfolio" && arg === "run") runPf();
+  if (tab === "dcf" && arg) { $("#dcfSym").value = arg; $("#dcfLoad").click(); }
+  if (tab === "macro") runMacro();
+}
+</script>
+</body>
+</html>

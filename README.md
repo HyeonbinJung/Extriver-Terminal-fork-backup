@@ -1,3 +1,29 @@
+<div align="center">
+
+# 🖥️ Fincept Terminal Easy
+
+**오픈소스 금융 터미널 [Fincept Terminal](https://github.com/Fincept-Corporation/FinceptTerminal)을 한국어로, 더 쉽게**
+
+![Language](https://img.shields.io/badge/언어-한국어-success) ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License](https://img.shields.io/badge/license-AGPL--3.0-C06524)
+
+</div>
+
+**Fincept Terminal**은 블룸버그 터미널 같은 전문가용 금융 분석 프로그램을 오픈소스로 만든 데스크톱 앱입니다 (C++20 · Qt6 · 내장 Python).
+**Fincept Terminal Easy**는 원본을 포크해 다음을 더했습니다.
+
+- 🖥️ **초보자용 한국어 웹 대시보드** ([`easy/`](easy/README.md)) — 앱의 Python 데이터·분석 모듈을 그대로 써서 **설치·빌드·API 키 없이** 브라우저에서 종목 분석, 포트폴리오 최적화, DCF 가치평가, 옵션 계산기, 경제 지표를 써볼 수 있습니다. 금융 용어에 마우스를 올리면 쉬운 설명이 나옵니다.
+- 🧭 **전체 기능 한국어 안내** — 데스크톱 앱의 화면 51개가 무엇을 하는지, 무엇이 필요한지(API 키·증권 계좌·LLM 키·로그인) 정리했습니다.
+
+```sh
+# Windows: easyun.bat 더블클릭  ·  macOS/Linux:
+sh easy/run.sh        # → http://127.0.0.1:8770
+```
+
+> [!NOTE]
+> 개인 학습용 비공식 포크이며 Fincept Corporation과 관계가 없습니다. 원본 문서의 한국어 번역은 [docs/translations/README.ko.md](docs/translations/README.ko.md)에 있고, 아래는 원본 README입니다.
+
+---
+
 > [!IMPORTANT]
 > ## 🔒 Fincept Terminal **Enterprise** — the private edition is now available.
 > RealTime data · Multi-agent AI research · Live broker, Backtest & Algo execution · Priority support ·

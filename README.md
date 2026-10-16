@@ -226,6 +226,40 @@ C++는 데스크톱 앱 본체, Python은 데이터 수집·분석 스크립트�
 
 ---
 
+## 기여자
+
+Extriver Terminal은 [**Extriver Partners**](https://extriver.com) 팀이 만들고 있습니다.
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://github.com/HyeonbinJung"><img src="images/team/hyeonbin-jung.jpg" width="140" alt="정현빈"/></a><br/>
+      <b>정현빈</b><br/>
+      <sub>Hyeonbin Jung</sub><br/>
+      <sub><b>Founder · CTO</b><br/>퀀트 리서치 · 엔지니어링</sub><br/>
+      <sub>컬럼비아대학교<br/>컴퓨터과학·수학</sub><br/>
+      <a href="https://github.com/HyeonbinJung"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a>
+      <a href="https://www.linkedin.com/in/hyeonbin-jung-a49b79274/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nd2hpdGUnIGQ9J000IDloNHYxMUg0ek02IDMuNWEyIDIgMCAxIDEgMCA0IDIgMiAwIDAgMSAwLTR6TTEwIDloMy44djEuNmguMWMuNS0xIDEuOC0xLjkgMy43LTEuOSA0IDAgNC40IDIuNSA0LjQgNS44VjIwaC00di01YzAtMS4yIDAtMi44LTEuNy0yLjhzLTIgMS4zLTIgMi43VjIwaC00eicvPjwvc3ZnPg==" alt="LinkedIn"/></a>
+    </td>
+    <td align="center" width="33%">
+      <img src="images/team/indeok-seo.jpg" width="140" alt="서인덕"/><br/>
+      <b>서인덕</b><br/>
+      <sub>Indeok Seo</sub><br/>
+      <sub><b>Research Head</b><br/>감사 · 리서치</sub><br/>
+      <sub>포항공과대학교 (POSTECH)<br/>컴퓨터공학과</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="images/team/seowon-cho.jpg" width="140" alt="조서원"/><br/>
+      <b>조서원</b><br/>
+      <sub>Seowon Cho</sub><br/>
+      <sub><b>CEO</b><br/>Chief Executive Officer</sub><br/>
+      <sub>서울대학교<br/>경제학부</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 출처
 
 - 베이스: [Fincept Terminal](https://github.com/Fincept-Corporation/FinceptTerminal) — © Fincept Corporation, AGPL-3.0

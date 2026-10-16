@@ -233,16 +233,14 @@ Extriver Terminal은 [**Extriver Partners**](https://extriver.com) 팀이 만들
 <table>
   <tr>
     <td align="center" width="33%">
-      <a href="https://github.com/HyeonbinJung"><img src="images/team/hyeonbin-jung.jpg" width="140" alt="정현빈"/></a><br/>
+      <img src="images/team/hyeonbin-jung.png" width="140" alt="정현빈"/><br/>
       <b>정현빈</b><br/>
       <sub>Hyeonbin Jung</sub><br/>
       <sub><b>Founder · CTO</b><br/>퀀트 리서치 · 엔지니어링</sub><br/>
-      <sub>컬럼비아대학교<br/>컴퓨터과학·수학</sub><br/>
-      <a href="https://github.com/HyeonbinJung"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a>
-      <a href="https://www.linkedin.com/in/hyeonbin-jung-a49b79274/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZmlsbD0nd2hpdGUnIGQ9J000IDloNHYxMUg0ek02IDMuNWEyIDIgMCAxIDEgMCA0IDIgMiAwIDAgMSAwLTR6TTEwIDloMy44djEuNmguMWMuNS0xIDEuOC0xLjkgMy43LTEuOSA0IDAgNC40IDIuNSA0LjQgNS44VjIwaC00di01YzAtMS4yIDAtMi44LTEuNy0yLjhzLTIgMS4zLTIgMi43VjIwaC00eicvPjwvc3ZnPg==" alt="LinkedIn"/></a>
+      <sub>컬럼비아대학교<br/>컴퓨터과학·수학</sub>
     </td>
     <td align="center" width="33%">
-      <img src="images/team/indeok-seo.jpg" width="140" alt="서인덕"/><br/>
+      <img src="images/team/indeok-seo.png" width="140" alt="서인덕"/><br/>
       <b>서인덕</b><br/>
       <sub>Indeok Seo</sub><br/>
       <sub><b>Research Head</b><br/>감사 · 리서치</sub><br/>

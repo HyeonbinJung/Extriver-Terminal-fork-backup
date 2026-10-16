@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="390" viewBox="0 0 880 390" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',Helvetica,Arial,sans-serif">
+<rect x="0.5" y="0.5" width="879" height="389" rx="14" fill="#ffffff" stroke="#d0d7de"/>
+<text x="32" y="46" font-size="20" font-weight="700" fill="#1f2328">언어 구성</text>
+<text x="32" y="70" font-size="13" fill="#656d76">GitHub Linguist 집계 · 2026-10-16 기준 · 총 36.22 MB · 12개 언어</text>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#eaeef2" stroke-width="38"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#f34b7d" stroke-width="38" stroke-dasharray="355.85 584.34" transform="rotate(-90.000 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#3572A5" stroke-width="38" stroke-dasharray="209.88 584.34" transform="rotate(129.834 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#f1e05a" stroke-width="38" stroke-dasharray="6.89 584.34" transform="rotate(259.740 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#DA3434" stroke-width="38" stroke-dasharray="2.65 584.34" transform="rotate(264.586 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#DA5B0B" stroke-width="38" stroke-dasharray="1.20 584.34" transform="rotate(266.819 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#5391FE" stroke-width="38" stroke-dasharray="1.03 584.34" transform="rotate(268.156 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#e34c26" stroke-width="38" stroke-dasharray="0.84 584.34" transform="rotate(268.791 175 222)"/>
+<circle cx="175" cy="222" r="93" fill="none" stroke="#8b949e" stroke-width="38" stroke-dasharray="1.12 584.34" transform="rotate(269.308 175 222)"/>
+<text x="175" y="218" text-anchor="middle" font-size="30" font-weight="700" fill="#1f2328">61.1%</text>
+<text x="175" y="242" text-anchor="middle" font-size="13" fill="#656d76">C++ (데스크톱 앱)</text>
+<circle cx="356" cy="118" r="6" fill="#f34b7d"/>
+<text x="370" y="123" font-size="14" font-weight="600" fill="#1f2328">C++</text>
+<rect x="525" y="112" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="112" width="106.9" height="12" rx="6" fill="#f34b7d"/>
+<text x="776" y="123" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">61.06%</text>
+<text x="848" y="123" text-anchor="end" font-size="12" fill="#656d76">22.12 MB</text>
+<circle cx="356" cy="149" r="6" fill="#3572A5"/>
+<text x="370" y="154" font-size="14" font-weight="600" fill="#1f2328">Python</text>
+<rect x="525" y="143" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="143" width="63.1" height="12" rx="6" fill="#3572A5"/>
+<text x="776" y="154" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">36.09%</text>
+<text x="848" y="154" text-anchor="end" font-size="12" fill="#656d76">13.07 MB</text>
+<circle cx="356" cy="180" r="6" fill="#f1e05a"/>
+<text x="370" y="185" font-size="14" font-weight="600" fill="#1f2328">JavaScript</text>
+<rect x="525" y="174" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="174" width="3.0" height="12" rx="6" fill="#f1e05a"/>
+<text x="776" y="185" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">1.35%</text>
+<text x="848" y="185" text-anchor="end" font-size="12" fill="#656d76">499 KB</text>
+<circle cx="356" cy="211" r="6" fill="#DA3434"/>
+<text x="370" y="216" font-size="14" font-weight="600" fill="#1f2328">CMake</text>
+<rect x="525" y="205" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="205" width="3.0" height="12" rx="6" fill="#DA3434"/>
+<text x="776" y="216" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">0.62%</text>
+<text x="848" y="216" text-anchor="end" font-size="12" fill="#656d76">230 KB</text>
+<circle cx="356" cy="242" r="6" fill="#DA5B0B"/>
+<text x="370" y="247" font-size="14" font-weight="600" fill="#1f2328">Jupyter Notebook</text>
+<rect x="525" y="236" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="236" width="3.0" height="12" rx="6" fill="#DA5B0B"/>
+<text x="776" y="247" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">0.37%</text>
+<text x="848" y="247" text-anchor="end" font-size="12" fill="#656d76">138 KB</text>
+<circle cx="356" cy="273" r="6" fill="#5391FE"/>
+<text x="370" y="278" font-size="14" font-weight="600" fill="#1f2328">PowerShell</text>
+<rect x="525" y="267" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="267" width="3.0" height="12" rx="6" fill="#5391FE"/>
+<text x="776" y="278" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">0.18%</text>
+<text x="848" y="278" text-anchor="end" font-size="12" fill="#656d76">65 KB</text>
+<circle cx="356" cy="304" r="6" fill="#e34c26"/>
+<text x="370" y="309" font-size="14" font-weight="600" fill="#1f2328">HTML</text>
+<rect x="525" y="298" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="298" width="3.0" height="12" rx="6" fill="#e34c26"/>
+<text x="776" y="309" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">0.14%</text>
+<text x="848" y="309" text-anchor="end" font-size="12" fill="#656d76">53 KB</text>
+<circle cx="356" cy="335" r="6" fill="#8b949e"/>
+<text x="370" y="340" font-size="14" font-weight="600" fill="#1f2328">기타</text>
+<rect x="525" y="329" width="175" height="12" rx="6" fill="#eaeef2"/>
+<rect x="525" y="329" width="3.0" height="12" rx="6" fill="#8b949e"/>
+<text x="776" y="340" text-anchor="end" font-size="14" font-weight="600" fill="#1f2328">0.19%</text>
+<text x="848" y="340" text-anchor="end" font-size="12" fill="#656d76">71 KB</text>
+<text x="350" y="372" font-size="11" fill="#656d76">기타: Qt Script · Shell · CSS · Dockerfile · Batchfile</text>
+</svg>

@@ -3,7 +3,7 @@
 let DATA = null;
 
 FE.screen({
-  id: "guide", label: "기능 안내", group: "도움말", order: 90, desc: "Fincept Terminal 데스크톱 앱 전체 기능 한국어 안내",
+  id: "guide", label: "기능 안내", group: "도움말", order: 90, desc: "데스크톱 앱(Fincept Terminal 기반) 전체 기능 한국어 안내",
   async render(el) {
     el.innerHTML = FE.screenHead("FEATURE GUIDE", "데스크톱 앱(C++ · Qt6)의 화면을 한국어로 정리했습니다",
       `<input class="inp" id="gQ" placeholder="기능 검색 (예: 백테스트, 뉴스)" style="width:260px">`) +

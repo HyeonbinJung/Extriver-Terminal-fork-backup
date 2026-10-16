@@ -1,5 +1,5 @@
 """
-Fincept Terminal Easy — 한국어 웹 터미널.
+마루 터미널 (MARU Terminal) — 한국어 웹 터미널.
 
 Fincept Terminal 데스크톱 앱(Obsidian 테마)의 화면 구성을 브라우저로 옮기고,
 앱에 들어 있는 Python 데이터 스크립트(fincept-qt/scripts)를 그대로 불러와
@@ -61,7 +61,7 @@ mimetypes.add_type("application/json", ".json")
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "FinceptEasy/2.0"
+    server_version = "MaruTerminal/2.0"
     allowed_hosts: set[str] = set()
 
     def log_message(self, fmt, *args):
@@ -135,7 +135,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Fincept Terminal Easy")
+    ap = argparse.ArgumentParser(description="MARU Terminal (마루 터미널)")
     ap.add_argument("--host", default=os.environ.get("EASY_HOST", "127.0.0.1"))
     ap.add_argument("--port", type=int, default=int(os.environ.get("EASY_PORT", "8770")))
     a = ap.parse_args()
@@ -143,7 +143,7 @@ def main() -> None:
     Handler.allowed_hosts |= {h.strip() for h in os.environ.get("EASY_ALLOWED_HOSTS", "").split(",") if h.strip()}
     load_modules()
     bad = {k: v for k, v in MODULES.items() if v != "ok"}
-    print(f"Fincept Terminal Easy → http://127.0.0.1:{a.port}  ({len(ROUTES)} routes, {len(MODULES) - len(bad)}/{len(MODULES)} modules)", flush=True)
+    print(f"MARU Terminal → http://127.0.0.1:{a.port}  ({len(ROUTES)} routes, {len(MODULES) - len(bad)}/{len(MODULES)} modules)", flush=True)
     srv = ThreadingHTTPServer((a.host, a.port), Handler)
     try:
         srv.serve_forever()

@@ -32,7 +32,7 @@ import treasury_data as tsy  # noqa: E402
 import worldbank_data as wb  # noqa: E402
 
 NET_TIMEOUT = 25
-UA = {"User-Agent": "Mozilla/5.0 (FinceptTerminalEasy)"}
+UA = {"User-Agent": "Mozilla/5.0 (MaruTerminal)"}
 
 # ISO3, ISO2 (World Bank id), Korean name
 COUNTRIES = [

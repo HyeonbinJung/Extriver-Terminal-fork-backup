@@ -1,6 +1,6 @@
-# 🖥️ Fincept Terminal Easy — 한국어 웹 터미널
+# 🏔️ 마루 터미널 (MARU Terminal) — 한국어 웹 터미널
 
-Fincept Terminal 데스크톱 앱(C++ / Qt6)의 **디자인(Obsidian 테마)과 화면 구성을 그대로** 브라우저로 옮긴 한국어 웹 터미널입니다.
+마루 터미널의 웹 버전입니다. [Fincept Terminal](https://github.com/Fincept-Corporation/FinceptTerminal) 데스크톱 앱(C++ / Qt6)의 **디자인(Obsidian 테마)과 화면 구성을 그대로** 브라우저로 옮긴 한국어 웹 터미널입니다.
 앱에 들어 있는 Python 데이터 스크립트(`fincept-qt/scripts`)를 그대로 불러와 **API 키·로그인·빌드 없이** 씁니다.
 점선 밑줄이 있는 금융 용어에 마우스를 올리면 쉬운 설명이 나옵니다.
 
@@ -58,4 +58,4 @@ easy/
 - 데이터는 Yahoo Finance·CoinGecko·세계은행·IMF 등 공개 소스에서 가져오며 지연되거나 빠질 수 있습니다. 모든 수치는 학습·참고용이며 투자 권유가 아닙니다.
 - 서버는 기본적으로 `127.0.0.1`에서만 열립니다. Host 헤더 검사, 다른 출처 POST 차단, iframe 삽입 차단을 합니다. 인증 기능이 없으므로 외부에 공개하지 마세요.
 - 가격 색은 원본 앱과 같이 **상승 초록 / 하락 빨강**입니다.
-- Fincept Corporation의 공식 제품이 아닌 개인 학습용 포크이며, 원본의 AGPL-3.0 라이선스를 따릅니다.
+- Fincept Terminal을 베이스로 만든 비공식 프로젝트이며 Fincept Corporation과 관계가 없습니다. 원본의 AGPL-3.0 라이선스를 따릅니다.

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fincept Terminal Easy — core runtime (global `FE`)
+   MARU Terminal (마루 터미널) — core runtime (global `FE`)
    Screens live in js/screens/*.js and call FE.screen({...}) to register.
    See easy/DEV_GUIDE.md for the full contract.
    ========================================================================== */
@@ -219,7 +219,7 @@ function route() {
   charts.forEach(c => c.destroy()); charts.clear();
   FE.current = def;
   $$("#tabbar button").forEach(b => b.classList.toggle("active", b.dataset.id === def.id));
-  document.title = `${def.label} — Fincept Terminal Easy`;
+  document.title = `${def.label} — 마루 터미널`;
   $("#sbScreen").textContent = def.label;
   const root = $("#workspace"); root.scrollTop = 0;
   root.innerHTML = `<div class="screen" id="scr-${def.id}"></div>`;

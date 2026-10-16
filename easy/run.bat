@@ -1,5 +1,5 @@
 @echo off
-rem MARU Terminal - Windows launcher
+rem Extriver Terminal - Windows launcher
 cd /d "%~dp0"
 if not exist .venv\Scripts\python.exe (
   echo [1/2] Creating virtual environment...

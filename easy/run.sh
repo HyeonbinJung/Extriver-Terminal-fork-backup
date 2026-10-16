@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# MARU Terminal - macOS / Linux launcher
+# Extriver Terminal - macOS / Linux launcher
 cd "$(dirname "$0")"
 if [ ! -x .venv/bin/python ]; then
   echo "[1/2] Creating virtual environment..."

@@ -1,6 +1,6 @@
-# 🏔️ 마루 터미널 (MARU Terminal) — 한국어 웹 터미널
+# 🖥️ Extriver Terminal — 한국어 웹 터미널
 
-마루 터미널의 웹 버전입니다. [Fincept Terminal](https://github.com/Fincept-Corporation/FinceptTerminal) 데스크톱 앱(C++ / Qt6)의 **디자인(Obsidian 테마)과 화면 구성을 그대로** 브라우저로 옮긴 한국어 웹 터미널입니다.
+Extriver Terminal의 웹 버전입니다. [Fincept Terminal](https://github.com/Fincept-Corporation/FinceptTerminal) 데스크톱 앱(C++ / Qt6)의 **디자인(Obsidian 테마)과 화면 구성을 그대로** 브라우저로 옮긴 한국어 웹 터미널입니다.
 앱에 들어 있는 Python 데이터 스크립트(`fincept-qt/scripts`)를 그대로 불러와 **API 키·로그인·빌드 없이** 씁니다.
 점선 밑줄이 있는 금융 용어에 마우스를 올리면 쉬운 설명이 나옵니다.
 

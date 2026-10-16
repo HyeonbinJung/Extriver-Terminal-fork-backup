@@ -1,10 +1,8 @@
 <div align="center">
 
-# 🏔️ 마루 터미널 (MARU Terminal)
+# 🖥️ Extriver Terminal
 
 **한국 투자자를 위한 올인원 금융 터미널**
-
-*마루: 산이나 지붕의 가장 높은 곳. 흩어진 금융 도구를 한 곳에 모아 시장을 가장 높은 곳에서 내려다봅니다.*
 
 ![언어](https://img.shields.io/badge/언어-한국어-success) ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?logo=cplusplus) ![Qt6](https://img.shields.io/badge/Qt-6-41CD52?logo=qt&logoColor=white) ![License](https://img.shields.io/badge/license-AGPL--3.0-C06524)
 
@@ -14,7 +12,7 @@
 
 ## 소개
 
-**마루 터미널**은 [**Fincept Terminal**](https://github.com/Fincept-Corporation/FinceptTerminal)을 베이스로 만들어졌으며,
+**Extriver Terminal**은 [**Fincept Terminal**](https://github.com/Fincept-Corporation/FinceptTerminal)을 베이스로 만들어졌으며,
 [**GS Quant**](https://github.com/goldmansachs/gs-quant) · [**미다스 터미널 (Midas Terminal)**](https://github.com/HyeonbinJung/Midas-Terminal) · [**OpenBB**](https://github.com/OpenBB-finance/OpenBB) · [**Qlib**](https://github.com/microsoft/qlib) · [**QuantConnect LEAN**](https://github.com/QuantConnect/Lean) · [**vn.py**](https://github.com/vnpy/vnpy) · [**Ghostfolio**](https://github.com/ghostfolio/ghostfolio) · [**Zipline**](https://github.com/quantopian/zipline) · [**Backtrader**](https://github.com/mementum/backtrader) 등
 유명한 금융 터미널·퀀트 플랫폼의 기능을 모두 포함시켜 **한 곳에서 사용할 수 있도록** 하였습니다.
 
@@ -85,7 +83,7 @@ docs/          개발 문서
 - 베이스: [Fincept Terminal](https://github.com/Fincept-Corporation/FinceptTerminal) — © Fincept Corporation, AGPL-3.0
 - 참고 프로젝트: [GS Quant](https://github.com/goldmansachs/gs-quant) · [Midas Terminal](https://github.com/HyeonbinJung/Midas-Terminal) · [OpenBB](https://github.com/OpenBB-finance/OpenBB) · [Qlib](https://github.com/microsoft/qlib) · [QuantConnect LEAN](https://github.com/QuantConnect/Lean) · [vn.py](https://github.com/vnpy/vnpy) · [Ghostfolio](https://github.com/ghostfolio/ghostfolio) · [Zipline](https://github.com/quantopian/zipline) · [Backtrader](https://github.com/mementum/backtrader)
 
-마루 터미널은 위 프로젝트들의 공식 제품이 아니며, 각 소유자와 관계가 없습니다.
+Extriver Terminal은 위 프로젝트들의 공식 제품이 아니며, 각 소유자와 관계가 없습니다.
 "Fincept", "Fincept Terminal" 및 관련 로고는 Fincept Corporation의 상표입니다.
 
 ## 라이선스

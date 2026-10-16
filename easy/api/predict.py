@@ -18,7 +18,7 @@ from api.common import BadRequest, cached, clean
 GAMMA = "https://gamma-api.polymarket.com"
 CLOB = "https://clob.polymarket.com"
 KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
-UA = {"User-Agent": "Mozilla/5.0 (MaruTerminal)", "Accept": "application/json"}
+UA = {"User-Agent": "Mozilla/5.0 (ExtriverTerminal)", "Accept": "application/json"}
 TIMEOUT = (5, 15)
 
 # Curated Polymarket tags (id → Korean label). Ids from gamma /events tags.

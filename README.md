@@ -232,26 +232,40 @@ Extriver Terminal은 [**Extriver Partners**](https://extriver.com) 팀이 만들
 
 <table>
   <tr>
-    <td align="center" width="33%">
-      <img src="images/team/hyeonbin-jung.png" width="140" alt="정현빈"/><br/>
+    <td align="center" width="20%">
+      <img src="images/team/hyeonbin-jung.png" width="120" alt="정현빈"/><br/>
       <b>정현빈</b><br/>
       <sub>Hyeonbin Jung</sub><br/>
       <sub><b>Founder · CTO</b><br/>퀀트 리서치 · 엔지니어링</sub><br/>
-      <sub>컬럼비아대학교<br/>컴퓨터과학·수학</sub>
+      <sub>Columbia University<br/>Computer Science &amp; Mathematics</sub>
     </td>
-    <td align="center" width="33%">
-      <img src="images/team/indeok-seo.png" width="140" alt="서인덕"/><br/>
+    <td align="center" width="20%">
+      <img src="images/team/seowon-cho.jpg" width="120" alt="조서원"/><br/>
+      <b>조서원</b><br/>
+      <sub>Seowon Cho</sub><br/>
+      <sub><b>CEO</b><br/>Chief Executive Officer</sub><br/>
+      <sub>서울대학교<br/>경제학부</sub>
+    </td>
+    <td align="center" width="20%">
+      <img src="images/team/indeok-seo.png" width="120" alt="서인덕"/><br/>
       <b>서인덕</b><br/>
       <sub>Indeok Seo</sub><br/>
       <sub><b>Research Head</b><br/>감사 · 리서치</sub><br/>
       <sub>포항공과대학교 (POSTECH)<br/>컴퓨터공학과</sub>
     </td>
-    <td align="center" width="33%">
-      <img src="images/team/seowon-cho.jpg" width="140" alt="조서원"/><br/>
-      <b>조서원</b><br/>
-      <sub>Seowon Cho</sub><br/>
-      <sub><b>CEO</b><br/>Chief Executive Officer</sub><br/>
-      <sub>서울대학교<br/>경제학부</sub>
+    <td align="center" width="20%">
+      <img src="images/team/jinseo-lee.png" width="120" alt="이진서"/><br/>
+      <b>이진서</b><br/>
+      <sub>Jinseo Lee</sub><br/>
+      <sub><b>Research</b><br/>경제 리서치</sub><br/>
+      <sub>New York University<br/>Economics</sub>
+    </td>
+    <td align="center" width="20%">
+      <img src="images/team/sookyung-ahn.png" width="120" alt="안수경"/><br/>
+      <b>안수경</b><br/>
+      <sub>Sookyung Ahn</sub><br/>
+      <sub><b>Research</b><br/>사회과학 리서치</sub><br/>
+      <sub>University of Toronto<br/>Social Sciences</sub>
     </td>
   </tr>
 </table>
